@@ -1,0 +1,4 @@
+#为了比较分析1B1 和最接近基因组之间的同源基因和排他性基因，利用 OrthoFinde 软件获得1b1和PCC10605的同源基因信息。
+orthofinder -f ~/protein -t 4
+#protein里是1b1和PCC10605的蛋白质序列faa，来自于prokaa
+
