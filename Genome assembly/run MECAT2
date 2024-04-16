@@ -1,0 +1,6 @@
+mecat.pl config 1B1_config_file.txt
+#config 1B1_config_file.txt为配置文件
+
+mecat.pl correct 1B1_config_file.txt
+mecat.pl trim 1B1_config_file.txt
+mecat.pl assemble 1B1_config_file.txt
