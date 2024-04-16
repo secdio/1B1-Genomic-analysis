@@ -1,0 +1,8 @@
+#从orthofinder的结果文件Results_date/Orthogroups/Orthogroups.GeneCount.tsv
+#即每个物种拥有每种orthogroups的基因数量的统计中提取每个物种拥有的orthogroups信息；并合并作为venn的输入文件。
+species=($(head -1 Orthogroups.GeneCount.tsv|sed "s/.pep//g")) #读取Orthogroups.GeneCount.tsv第一行表头写入species列表中
+for i in $(seq 1 `expr ${#species[@]} - 2`); do awk -v awka=`expr $i + 1` '$awka != 0 {print $1}' Orthogroups.GeneCount.tsv  |sed "1s/.*/${species[$i]}/" >${species[$i]}.temp; done #第二到倒数第二列（物种数据所在列）不为0时，输出第一列内容（OG的ID号）。
+paste *.temp >orthogroups.venn #把提取的所有物种横向拼接成一个文件，即为venn的输入。
+rm *.temp #删除临时文件
+
+#参考https://yanzhongsino.github.io/2021/09/29/bio_plot_venn/
