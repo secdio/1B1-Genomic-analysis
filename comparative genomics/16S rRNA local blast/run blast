@@ -1,0 +1,12 @@
+#将1B1与其余19个藻株的16S rRNAfasta序列合成一个fasta文件,命名为ncbi_16SrRNA_19.fasta
+makeblastdb -in ncbi_16SrRNA_19.fasta -out 16SrRNA_19db -dbtype nucl
+#库名 16SrRNA_19db 文件类型为核酸文件（nucl） 
+#建库成功后会在16SrRNA_19db所在文件中生成 16SrRNA_19db3个格式文件（nhr、nin和nsq） 
+time blastn -query 1b1.fasta -db 16SrRNA_19db -evalue 1e-5 -outfmt 6 -out blast_19
+#在BLAST中，outfmt 6表示以表格形式输出，每行包含一个比对的结果，字段之间用制表符分隔。
+#outfmt 6具体字段的顺序和含义是固定的
+#结果文件为blast_19
+
+cut -f 2,3,11,12 blast_19 >output_blast19
+cat output_blast19 |sort k2 >output_blast19_sort
+#只看那几列，并且使用% identity：序列比对的一致性百分比排序
