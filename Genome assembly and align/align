@@ -1,0 +1,11 @@
+#使用bwa进行比对
+bwa index /home/secdio/smrt_asm/1b1_c85/4-fsa/contigs.fasta -p 1b1_c85_bwa
+#建索引，contigs.fasta 为MECAT2组装得到的基因组文件
+bwa mem 1b1_c85_bwa ~/smrt_asm/1B1_1_1.clean.fq  ~/smrt_asm/1B1_1_2.clean.fq > 1b1_c85_bwa.sam
+#使用bwa mem算法进行比对，比对的是二代测序数据
+samtools view -bS 1b1_c85_bwa.sam >1b1_c85_bwa.bam
+samtools sort 1b1_c85_bwa.bam -o 1b1_c85_bwa_sorted.bam
+samtools index 1b1_c85_bwa_sorted.bam
+samtools mpileup -f ~/smrt_asm/contigs.fasta 1b1_c85_bwa_sorted.bam >1b1.bcf
+#结果是bcf里面空空如也
+
