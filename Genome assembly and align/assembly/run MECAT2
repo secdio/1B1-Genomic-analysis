@@ -1,0 +1,8 @@
+mecat.pl config 1B1_config_file.txt
+#创建一个config file,并填入相关信息
+mecat.pl correct 1B1_config_file.txt
+#校正raw reads，得到新文件夹 1b1_c85
+mecat.pl trim 1B1_config_file.txt
+#在校正好的reads中修剪低质量序列，得到新文件夹2-trim_bases
+mecat.pl assemble 1B1_config_file.txt
+#使用修剪好了的reads组装contig，得到新文件夹 3-assembly和4-fsa
